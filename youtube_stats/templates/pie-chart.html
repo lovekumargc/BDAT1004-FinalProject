@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Python Final Assignment</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+               var data = google.visualization.arrayToDataTable([
+
+                {% for key, value in data.items() %}
+                {% if value is string %}
+                ['{{ key }}', '{{ value }}'],
+                {% else %}
+                ['{{ key }}', {{ value }}],
+                {% endif %}
+                {% endfor %}
+                ]);
+
+        var options = {
+          width: 800,
+          legend: { position: 'none' },
+          is3D:true,
+          colors: ['red'],
+          chart: {
+            title: 'Top 10 tags used in the trending videos',
+            subtitle: 'X Axis shows tag names and Y Axis shows tag count' },
+          vAxis:{
+              "title": 'Count', label:'Count'
+          },
+          hAxis: {
+               title:'Tags' , side: 'bottom',
+               textStyle : { fontSize: 15 // or the number you want
+                        }},
+          bar: { groupWidth: "90%"
+                }
+        };
+
+        var bar_chart = new google.charts.Bar(document.getElementById('barchart_material'));
+        bar_chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+      google.charts.load('current', {packages: ['corechart', 'bar']});
+      google.charts.setOnLoadCallback(drawStacked);
+      function drawStacked() {
+      var data = google.visualization.arrayToDataTable([
+
+                {% for key, value in data1.items() %}
+                {% if value is string %}
+                ['{{ key }}', '{{ value }}'],
+                {% else %}
+                [{{ key }}, {{ value }}],
+                {% endif %}
+                {% endfor %}
+                ]);
+
+
+      var options = {
+          width: 800,
+          legend: { position: 'none' },
+          is3D:true,
+          colors: ['red'],
+          chart: {
+            title: 'Top 10 tags used in the trending videos',
+            subtitle: 'X Axis shows tag names and Y Axis shows tag count' },
+          vAxis:{
+              "title": 'Dislikes', label:'Count'
+          },
+          hAxis: {
+               title:'Likes' , side: 'bottom',
+               textStyle : { fontSize: 15 // or the number you want
+                        }},
+          bar: { groupWidth: "90%"
+                }
+        };
+
+        var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+    </script>
+</head>
+<body>
+<div class="header">
+    <img style="display: inline;" src="https://i.ibb.co/qMdFPVz/pngguru-com.png" width="150" height="100" alt="logo" />
+    <h1>Youtube Statistics</h1>
+</div>
+<h1>Visualization - 1</h1>
+<div id="barchart_material" style="width: 900px; height: 500px;" align="center" ></div>
+<h1>Visualization - 2</h1>
+<div id="chart_div" style="width: 900px; height: 500px;" align="center" ></div>
+</body>
+</html>
