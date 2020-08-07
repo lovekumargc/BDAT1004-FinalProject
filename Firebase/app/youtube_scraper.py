@@ -6,7 +6,7 @@ from app.youtube_video_model import YoutubeVideoModel
 
 class YoutubeClient:
     countryCode = "CA"
-    youtubeApiKey = ""
+    youtubeApiKey = "AIzaSyD72yBVHqWuyYpK4NvbgWE5ZEFPf5Om0vI"
     maximumResults = 50
     chart = "mostPopular"
 
